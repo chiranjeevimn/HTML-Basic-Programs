@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        h1{
+            color:red;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+            border: 1px solid #e21111;
+            border-radius: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            color: #d5e76f;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        button{
+            background-color: aqua;
+            color: #c74451;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .result.success {
+            background-color: #d4edda;
+            border: 1px solid #7dc28d;
+            color: #0a631e;
+        }
+
+        .result.error {
+            background-color: #b86e74;
+            border: 1px solid #b4555e;
+            color: #c74451;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Login Page</h1>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            const resultDiv = document.getElementById('result');
+
+            loginForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+
+                if (!validatePassword(password)) {
+                    resultDiv.innerHTML = '<div class="result error">Password must be at least 8 characters long and contain 1 uppercase letter, 1 lowercase letter, and 1 special character.</div>';
+                } else {
+                    const encryptedPassword = encryptPassword(password);
+                    resultDiv.innerHTML = `
+                        <div class="result success">
+                            Username: ${username};<br>
+                            Encrypted Password: ${encryptedPassword};
+                        </div>
+                   ` ;
+                }
+            });
+
+            function validatePassword(password) {
+                const passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/;
+                return passw.test(password);
+            }
+
+            function encryptPassword(password) {
+                // Replace this with your actual encryption logic
+                // For demonstration purposes, we are simply returning the password as is
+                return password;
+            }
+        });
+    </script>
+</body>
+</html>
