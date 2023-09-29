@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Content Example</title>
+</head>
+<body>
+    <!-- Static HTML Element -->
+    <div id="staticElement">
+        This is a static element.
+    </div>
+
+    <!-- Dynamic Content Section -->
+    <div id="dynamicContent">
+        <h2>Dynamic Content:</h2>
+        <button id="changeContentBtn">Change Content</button>
+    </div>
+
+    <script>
+        // Function to change dynamic content
+        function changeDynamicContent() {
+            const dynamicContent = document.getElementById('dynamicContent');
+            dynamicContent.innerHTML = `
+                <h2>New Dynamic Content:</h2>
+                <p>This content is dynamically generated.</p>
+                <button id="resetContentBtn">Reset Content</button>
+            `;
+
+            // Add a click event listener for the new button
+            const resetContentBtn = document.getElementById('resetContentBtn');
+            resetContentBtn.addEventListener('click', () => {
+                dynamicContent.innerHTML = ''; // Clear dynamic content
+            });
+        }
+
+        // Add click event listener to the "Change Content" button
+        const changeContentBtn = document.getElementById('changeContentBtn');
+        changeContentBtn.addEventListener('click', changeDynamicContent);
+    </script>
+</body>
+</html>
